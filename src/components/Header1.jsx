@@ -8,7 +8,7 @@ const Header1 = () => {
   let activeTodos=4
   return (
     <>
-      <div className="backdrop-blur-2xl bg-white/5 rounded-3xl border border-white/10 p-6 shadow-2xl">
+      <div className="backdrop-blur-2xl mb-4 bg-white/5 rounded-3xl border border-white/10 p-6 shadow-2xl">
         <div className="flex items-center justify-between mb-4">
           {/*left side */}
 
@@ -46,6 +46,8 @@ const Header1 = () => {
             <span className="text-white font-bold text-sm">{Math.round(progress)}%</span>
           </div>
 
+
+          {/* progress bar */}
 
           <div className="relative bg-white/10 h-2  overflow-hidden  rounded-full w-full">
           <div className="absolute inset-0  bg-linear-to-br from-emrals-400 
