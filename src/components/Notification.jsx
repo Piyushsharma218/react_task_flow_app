@@ -1,9 +1,9 @@
-import { AlertCircle, CheckCircle2 } from 'lucide-react';
+import { AlertCircle, CheckCircle2, X } from 'lucide-react';
 import React from 'react'
 
-const Notification = () => {
- let notification;
- let onClose;
+const Notification = ({notification,onClose}) => {
+//  let notification;
+//  let onClose;
 
    if (!notification) return null;
   return (

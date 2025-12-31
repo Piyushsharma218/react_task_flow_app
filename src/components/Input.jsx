@@ -1,11 +1,11 @@
 import React from "react";
 import { Plus } from "lucide-react";
 
-const Input = () => {
-  let value;
-  let onChange;
-  let onAdd;
-  let onKeyPress;
+const Input = ({value,onChange,onAdd,onKeyPress}) => {
+  // let value;
+  // let onChange;
+  // let onAdd;
+  // let onKeyPress;
 
   return (
     <div className="p-3 backdrop-blur-2xl bg-white/5 rounded-2xl border border-white/10 mb-4 hover:bg-white/10 transition-all duration-300">

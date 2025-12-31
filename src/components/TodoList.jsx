@@ -2,15 +2,16 @@ import React from "react";
 import Todoitem from "./TodoItem";
 import { Sparkles } from "lucide-react";
 
-const TodoList = () => {
-  let todos = [];
-  let editingId;
-  let editText;
+const TodoList = ({todos,onDelete ,onStartEdit,onSaveEdit,onCancelEdit,editingId,
+            editText}) => {
+  // let todos = [];
+  // let editingId;
+  // let editText;
   let onToggle;
-  let onStartEdit;
-  let onSaveEdit;
-  let onCancelEdit;
-  let onDelete;
+  // let onStartEdit;
+  // let onSaveEdit;
+  // let onCancelEdit;
+  // let onDelete;
   let onEditTextChange;
   let onEditKeyPress;
 
@@ -33,7 +34,7 @@ const TodoList = () => {
 
   return (
     <>
-      <div className="space-y-2 p-4 bg-red-300">
+      <div className="space-y-2 p-4 ">
         {todos.map((todo, index) => (
           <Todoitem
             key={index}
