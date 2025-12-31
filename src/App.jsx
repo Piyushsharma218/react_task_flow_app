@@ -1,7 +1,7 @@
 import Animate from "./components/Animate";
 import Notification from "./components/Notification";
 import Header1 from "./components/Header1";
-import Statsgrid from "./components/Statsgrid";
+import StatsGrid from "./components/StatsGrid";
 import Input from "./components/Input";
 import TodoList from "./components/TodoList";
 import ClearButton from "./components/ClearButton";
@@ -158,7 +158,7 @@ function App() {
         <div className="max-w-3xl mx-auto relative z-1">
           <Header1 activeTodos={activeTodos} progress={progress} />
 
-          <Statsgrid
+          <StatsGrid
             activeTodos={activeTodos}
             completedTodos={completedTodos}
             totalTodos={todos.length}
