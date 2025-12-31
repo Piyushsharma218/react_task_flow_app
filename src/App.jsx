@@ -5,7 +5,7 @@ import Statsgrid from "./components/Statsgrid";
 import Input from "./components/Input";
 import TodoList from "./components/TodoList";
 import ClearButton from "./components/ClearButton";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const playSound = () => {};
 
@@ -47,7 +47,7 @@ function App() {
 
     setTodos([newTodo, ...todos]);
     setInput("");
-    playSound("add");
+    // playSound("add");
     showNotification("✨ Task added Successfully!");
   };
 
@@ -74,7 +74,7 @@ function App() {
 
     setEditText("");
     setEditingId(null);
-    playSound("update");
+    // playSound("update");
     showNotification("Task updated successfully!");
   };
 
@@ -83,6 +83,67 @@ function App() {
     setEditText("");
     setEditingId(null);
   };
+
+  //edit key press
+  const handleEditKeyPress = (e, id) => {
+    if (e.key === "Enter") {
+      saveEdit(id);
+    } else if (e.key === "Escape") {
+      cancelEdit();
+    }
+  };
+
+  // clear all completed task
+  const clearCompleted = () => {
+    setTodos(todos.filter((t) => !t.completed));
+    // playSound("delete");
+    showNotification("🗑️ Task deleted ", "info");
+  };
+
+  // onToggle
+  const toggleTodo = (id) => {
+    setTodos(
+      todos.map((todo) =>
+        todo.id === id ? { ...todo, completed: !todo.completed } : todo
+      )
+    );
+    const todo = todos.find((t) => t.id === id);
+
+    if (!todo.completed) {
+      // playSound("complete");
+      showNotification("🎉 Greate Job! Task completed!");
+    }
+  };
+
+  // get from locatStorage
+  useEffect(() => {
+   try {
+    const data = localStorage.getItem(STORAGE_KEY);
+    if(data){
+      setTodos(JSON.parse(data))
+    }
+   } catch (error) {
+    console.log("Load Error: ",error)
+   } finally{
+    setHasLoaded(true);
+   }
+  }, [])
+  
+  
+  // save to localStorage
+  useEffect(() => {
+    if(!hasLoaded) return;
+    try {
+      localStorage.setItem(STORAGE_KEY,JSON.stringify(todos))
+    } catch (error) {
+      console.log("save error : ",error)
+      
+    }
+  }, [todos,hasLoaded])
+
+  const activeTodos = todos.filter((t) => !t.completed).length;
+  const completedTodos = todos.filter((t) => t.completed).length;
+  const progress = todos.length > 0 ? (completedTodos / todos.length) * 100 : 0;
 
   return (
     <>
@@ -95,9 +156,13 @@ function App() {
         />
 
         <div className="max-w-3xl mx-auto relative z-1">
-          <Header1 />
+          <Header1 activeTodos={activeTodos} progress={progress} />
 
-          <Statsgrid />
+          <Statsgrid
+            activeTodos={activeTodos}
+            completedTodos={completedTodos}
+            totalTodos={todos.length}
+          />
 
           <Input
             value={input}
@@ -114,9 +179,12 @@ function App() {
             onCancelEdit={cancelEdit}
             editingId={editingId}
             editText={editText}
+            onEditTextChange={(e) => setEditText(e.target.value)}
+            onEditKeyPress={handleEditKeyPress}
+            onToggle={toggleTodo}
           />
 
-          <ClearButton />
+          <ClearButton onClick={clearCompleted} />
         </div>
       </div>
     </>

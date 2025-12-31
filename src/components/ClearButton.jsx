@@ -1,8 +1,8 @@
 import React from "react";
 
-const ClearButton = () => {
+const ClearButton = ({onClick}) => {
   let completedTodos;
-  let onClick;
+  // let onClick;
 
   if (completedTodos === 0) return null;
 

@@ -2,20 +2,30 @@ import React from "react";
 import Todoitem from "./TodoItem";
 import { Sparkles } from "lucide-react";
 
-const TodoList = ({todos,onDelete ,onStartEdit,onSaveEdit,onCancelEdit,editingId,
-            editText}) => {
+const TodoList = ({
+  todos,
+  onDelete,
+  onStartEdit,
+  onSaveEdit,
+  onCancelEdit,
+  editingId,
+  onEditTextChange,
+  onEditKeyPress,
+  onToggle,
+  editText
+}) => {
   // let todos = [];
   // let editingId;
   // let editText;
-  let onToggle;
+  // let onToggle;
   // let onStartEdit;
   // let onSaveEdit;
   // let onCancelEdit;
   // let onDelete;
-  let onEditTextChange;
-  let onEditKeyPress;
+  // let onEditTextChange;
+  // let onEditKeyPress;
 
-   if (todos.length === 0) {
+  if (todos.length === 0) {
     return (
       <div className="text-center py-16 backdrop-blur-2xl bg-white/5 rounded-2xl border border-white/0">
         <div className="w-16 h-16 bg-linear-to-br from-violet-500/20  to-fuchsia-500/20 rounded-2xl flex items-center justify-center mx-auto mb-3">
